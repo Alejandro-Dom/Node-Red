@@ -1,0 +1,465 @@
+[
+    {
+        "id": "c8675b9b88cb02f1",
+        "type": "tab",
+        "label": "Detectos Sintomas COVID",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f387b6a3d62a3c42",
+        "type": "mqtt in",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "topic": "codigoIoT/detectorSintomas/flow",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "edd3004a.11da88",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "f8d3b346adfb6754",
+                "223c7a1ee3846c47",
+                "f85317f4b978ab32"
+            ]
+        ]
+    },
+    {
+        "id": "f8d3b346adfb6754",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Ritmo cardiaco",
+        "func": "if (msg.payload.hrv == 1){\n     msg.payload=msg.payload.hr;\n     global.set (\"heartrate\", msg.payload);\n     return msg;\n }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 40,
+        "wires": [
+            [
+                "8d08ade53c444514"
+            ]
+        ]
+    },
+    {
+        "id": "223c7a1ee3846c47",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Oxigenacion",
+        "func": "if (msg.payload.spo2v == 1){\n     msg.payload=msg.payload.spo2;\n     global.set (\"spo2\", msg.payload);\n     return msg;\n }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "9b9a472ccb57b9d2"
+            ]
+        ]
+    },
+    {
+        "id": "f85317f4b978ab32",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Temperatura",
+        "func": "msg.payload = msg.payload.tir\nglobal.set (\"tir\", msg.payload);\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "ec00058fc7ca3c80"
+            ]
+        ]
+    },
+    {
+        "id": "8d08ade53c444514",
+        "type": "ui_gauge",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "group": "da15112b59be8649",
+        "order": 1,
+        "width": 3,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Frecuencia Cardíaca",
+        "label": "BPM",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#729fcf",
+            "#00b500",
+            "#cc0000"
+        ],
+        "seg1": "60",
+        "seg2": "100",
+        "className": "",
+        "x": 800,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9b9a472ccb57b9d2",
+        "type": "ui_gauge",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "group": "da15112b59be8649",
+        "order": 2,
+        "width": 3,
+        "height": 4,
+        "gtype": "wave",
+        "title": "Porcentaje de Oxigenación",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "",
+        "seg2": "95",
+        "className": "",
+        "x": 820,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ec00058fc7ca3c80",
+        "type": "ui_gauge",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "group": "da15112b59be8649",
+        "order": 3,
+        "width": 3,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperatura Corporal",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "39",
+        "colors": [
+            "#729fcf",
+            "#73d216",
+            "#ca3838"
+        ],
+        "seg1": "35.5",
+        "seg2": "36.5",
+        "className": "",
+        "x": 800,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "40ae3b34db4cf906",
+        "type": "ui_text_input",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "label": "Nombre del paciente",
+        "tooltip": "",
+        "group": "3f51514c9442a45e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "e6f12dabf55d4e32"
+            ]
+        ]
+    },
+    {
+        "id": "f38be938d8848e47",
+        "type": "ui_text_input",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "label": "Correo electrónico",
+        "tooltip": "",
+        "group": "3f51514c9442a45e",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "email",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 170,
+        "y": 400,
+        "wires": [
+            [
+                "9ae1d861a1b9c2c9"
+            ]
+        ]
+    },
+    {
+        "id": "e6f12dabf55d4e32",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Nombre del paciente",
+        "func": "global.set(\"Paciente\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ae1d861a1b9c2c9",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Nombre del paciente",
+        "func": "global.set(\"Correo\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a65c5fd7addaa188",
+        "type": "ui_button",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "group": "f1c7037d62454555",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Realizar Protodiagnostico",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 190,
+        "y": 480,
+        "wires": [
+            [
+                "30b2a7a7ecd975de"
+            ]
+        ]
+    },
+    {
+        "id": "30b2a7a7ecd975de",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Protodiagnostico",
+        "func": "if((global.get(\"tir\") > 35.5 && global.get(\"tir\") < 36.5)&&(global.get(\"spo2\") > 90)\n&&(global.get(\"heartrate\") > 60 && global.get(\"heartrate\") < 100)){\n    msg.payload = \"Signos vitales normales\";\n    global.set(\"protodiagnostico\", msg.payload);\n    msg.to = global.get(\"Correo\");\n    msg.topic = \"Protodiagnóstico COVID\";\n    return msg;\n}\nelse {\n    msg.payload = \"Signos vitales anormales, asistir con un médico para confirmar diagnóstico \";\n    global.set(\"protodiagnostico\", msg.payload);\n    msg.to = global.get(\"Correo\");\n    msg.topic = \"Protodiagnóstico COVID\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "ae07330d0bae683d",
+                "b5bf26c11d3d4178"
+            ]
+        ]
+    },
+    {
+        "id": "ae07330d0bae683d",
+        "type": "ui_audio",
+        "z": "c8675b9b88cb02f1",
+        "name": "",
+        "group": "f1c7037d62454555",
+        "voice": "urn:moz-tts:speechd:Spanish%20(Latin%20America)?es",
+        "always": "",
+        "x": 680,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b5bf26c11d3d4178",
+        "type": "function",
+        "z": "c8675b9b88cb02f1",
+        "name": "Base de datos",
+        "func": "msg.topic = \"INSERT INTO registro (`nombre`,`correo`,`temp`,`bpm`,`sp02`,`protodiagnostico`) VALUES ('\" + global.get (\"Paciente\") + \"','\" + global.get (\"Correo\") + \"',\" + global.get (\"tir\") + \",\" + global.get (\"heartrate\") + \",\" + global.get (\"spo2\") + \",'\" + global.get(\"protodiagnostico\") + \"');\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07b49a3852cb7e79",
+        "type": "ui_template",
+        "z": "c8675b9b88cb02f1",
+        "group": "4bc541b516c608e9",
+        "name": "",
+        "order": 1,
+        "width": 22,
+        "height": 5,
+        "format": "<iframe src=\"http://localhost:3000/d-solo/f_Xyq1MVz/registro?from=1662629807188&to=1662673007188&orgId=1&panelId=123125\" width=\"1250\" height=\"300\" frameborder=\"0\"></iframe>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 140,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eab606740c09c84e",
+        "type": "comment",
+        "z": "c8675b9b88cb02f1",
+        "name": "Panel de Grafana",
+        "info": "",
+        "x": 140,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "9b305ceafd9cd04b",
+        "type": "ui_spacer",
+        "z": "c8675b9b88cb02f1",
+        "name": "spacer",
+        "group": "3f51514c9442a45e",
+        "order": 1,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "b7b87e824656205f",
+        "type": "ui_spacer",
+        "z": "c8675b9b88cb02f1",
+        "name": "spacer",
+        "group": "3f51514c9442a45e",
+        "order": 3,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "edd3004a.11da88",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "da15112b59be8649",
+        "type": "ui_group",
+        "name": "Indicadores",
+        "tab": "c2f2400a9bc58445",
+        "order": 1,
+        "disp": true,
+        "width": 9,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3f51514c9442a45e",
+        "type": "ui_group",
+        "name": "Información del paciente",
+        "tab": "c2f2400a9bc58445",
+        "order": 2,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f1c7037d62454555",
+        "type": "ui_group",
+        "name": "Protodiagnostico",
+        "tab": "c2f2400a9bc58445",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4bc541b516c608e9",
+        "type": "ui_group",
+        "name": "",
+        "tab": "c2f2400a9bc58445",
+        "order": 4,
+        "disp": false,
+        "width": "22",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c2f2400a9bc58445",
+        "type": "ui_tab",
+        "name": "Detector de síntomas COVID",
+        "icon": "dashboard",
+        "order": 8,
+        "disabled": false,
+        "hidden": true
+    }
+]

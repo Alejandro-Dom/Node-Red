@@ -1,0 +1,2873 @@
+[
+    {
+        "id": "43f6f4537b5e41bf",
+        "type": "subflow",
+        "name": "Subflow 1",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "29b568df773c98e2",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "5555a901d4d07fff"
+            ]
+        ]
+    },
+    {
+        "id": "5555a901d4d07fff",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Humedad",
+        "func": "\nmsg.payload = global.get(\"TempCor2\") + \",\" + global.get(\"Ritmo2\") + \n\",\" + global.get(\"O22\") + \",\" + global.get(\"TempAmb2\") + \",\" + global.get(\"Humy2\"); \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "fc768883536e1142",
+                "846d34f222ad01cc"
+            ]
+        ]
+    },
+    {
+        "id": "4e25600dea4ce4dd",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "94413d114c0da71d"
+            ]
+        ]
+    },
+    {
+        "id": "94413d114c0da71d",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Humedad",
+        "func": "var valor = Math.floor(Math.random()*101);\nglobal.set(\"Humy2\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58929a3d0f720033",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "8e47f2a1d265d5a0"
+            ]
+        ]
+    },
+    {
+        "id": "8e47f2a1d265d5a0",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Temperatura ambiental",
+        "func": "var valor = Math.floor(Math.random()*(26-20)) + 20;\nglobal.set(\"TempAmb2\",valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "444650d671a72abf",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "558561632e02438c"
+            ]
+        ]
+    },
+    {
+        "id": "558561632e02438c",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Temperatura corporal",
+        "func": "var valor = Math.random() * (37.2 - 35.8) + 35.8;\nmsg.payload = valor.toFixed(2);\nglobal.set(\"TempCor2\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "46abc7de9a94ba9f",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "f8b97cb3663b1393"
+            ]
+        ]
+    },
+    {
+        "id": "f8b97cb3663b1393",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Frecuencia Cardíaca",
+        "func": "var valor = Math.floor(Math.random() * (190 - 70)) + 70;\nmsg.payload = valor;\nglobal.set(\"Ritmo2\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5104ecf48f7fad24",
+        "type": "inject",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "4",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "85e47f9186576a8e"
+            ]
+        ]
+    },
+    {
+        "id": "85e47f9186576a8e",
+        "type": "function",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "Oxigenacion",
+        "func": "var valor = Math.floor(Math.random()*101);\nglobal.set(\"O22\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "846d34f222ad01cc",
+        "type": "mqtt out",
+        "z": "43f6f4537b5e41bf",
+        "g": "fd8390fed4ba031b",
+        "name": "",
+        "topic": "Sensor/IoT/23/2",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e2a9797aa584475",
+        "x": 680,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "fc768883536e1142",
+        "type": "debug",
+        "z": "43f6f4537b5e41bf",
+        "d": true,
+        "g": "fd8390fed4ba031b",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fd8390fed4ba031b",
+        "type": "group",
+        "z": "43f6f4537b5e41bf",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "29b568df773c98e2",
+            "5555a901d4d07fff",
+            "4e25600dea4ce4dd",
+            "94413d114c0da71d",
+            "58929a3d0f720033",
+            "8e47f2a1d265d5a0",
+            "444650d671a72abf",
+            "558561632e02438c",
+            "46abc7de9a94ba9f",
+            "f8b97cb3663b1393",
+            "5104ecf48f7fad24",
+            "85e47f9186576a8e",
+            "846d34f222ad01cc",
+            "fc768883536e1142"
+        ],
+        "x": 194,
+        "y": 79
+    },
+    {
+        "id": "571ca4d46dc44e7f",
+        "type": "tab",
+        "label": "Incubadora",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "31cbc9c68318b3b5",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Humedad",
+        "group": "22f96fb4bcb6f5b3",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "wave",
+        "title": "",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 760,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "f321ce3f7261550d",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Humedad",
+        "group": "22f96fb4bcb6f5b3",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "%",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 760,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "225e565d53a1ca83",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura Ambiental",
+        "group": "f10780ad1acf95ac",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "27",
+        "colors": [
+            "#01dfc5",
+            "#3de600",
+            "#f00000"
+        ],
+        "seg1": "19.9",
+        "seg2": "24.1",
+        "diff": false,
+        "className": "",
+        "x": 810,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "25641fde25ca0167",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura ambiental",
+        "group": "f10780ad1acf95ac",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "°C",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 800,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8443329fced91451",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura Corporal",
+        "group": "c3aa2c4196690888",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "40",
+        "colors": [
+            "#00e6e2",
+            "#0de600",
+            "#ca3838"
+        ],
+        "seg1": "36.4",
+        "seg2": "37.6",
+        "diff": false,
+        "className": "",
+        "x": 800,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "55e039dfc592892d",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura Corporal",
+        "group": "c3aa2c4196690888",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "°C",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 800,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1875fca7429dfaa7",
+        "type": "ui_text_input",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "label": "Nombre del Paciente",
+        "tooltip": "",
+        "group": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 1080,
+        "y": 40,
+        "wires": [
+            [
+                "5a2a58dbb793ec9a"
+            ]
+        ]
+    },
+    {
+        "id": "5a2a58dbb793ec9a",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "func": "global.set(\"Paciente\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1280,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9316b532cf16250c",
+        "type": "mqtt in",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Reporte/dia/1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "4e2a9797aa584475",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 930,
+        "y": 520,
+        "wires": [
+            [
+                "b1922d3aa6b041e2",
+                "5fe3168d642a3c70"
+            ]
+        ]
+    },
+    {
+        "id": "bb907482442e026c",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8afa43479c641952",
+        "type": "mqtt out",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "channels/2361879/publish",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e3e9e5897f271bef",
+        "x": 1310,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "33f0a62864c6d9aa",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "40",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "92134b36089c900b"
+            ]
+        ]
+    },
+    {
+        "id": "92134b36089c900b",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Humedad",
+        "func": "\nmsg.payload = global.get(\"TempCor\") + \",\" + global.get(\"Ritmo\") + \n\",\" + global.get(\"O2\")  + \",\" +global.get(\"TempAmb\") + \",\" + global.get(\"Humy\"); \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 560,
+        "wires": [
+            [
+                "b0a13f7d86a128f4",
+                "6c3041f2e173c302"
+            ]
+        ]
+    },
+    {
+        "id": "b0a13f7d86a128f4",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "37ee40054c71a0c0",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Frecuencia",
+        "group": "eb8bede1b3e2cccc",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "compass",
+        "title": "",
+        "label": "bpm",
+        "format": "{{value}}",
+        "min": "70",
+        "max": "190",
+        "colors": [
+            "#01dfc5",
+            "#3de600",
+            "#f00000"
+        ],
+        "seg1": "22",
+        "seg2": "24",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f909aa55a731c71c",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Frecuencia",
+        "group": "eb8bede1b3e2cccc",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "bpm",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aab9273d32d1968f",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Oxigenacion",
+        "group": "aa6d7e8c4619f331",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "donut",
+        "title": "",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#0de600"
+        ],
+        "seg1": "89",
+        "seg2": "94",
+        "diff": false,
+        "className": "",
+        "x": 770,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1b6f36b68390f074",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Oxigenacion",
+        "group": "aa6d7e8c4619f331",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": " %",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "50",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c3041f2e173c302",
+        "type": "mqtt out",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Sensor/IoT/23/1",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e2a9797aa584475",
+        "x": 440,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "dfeec47e8a248ddf",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "function 15",
+        "func": "var inputVector = msg.payload;\nvar valoresSeparados = inputVector.split(',');\n\nvar outputArray = [];\nfor (var i = 0; i < valoresSeparados.length; i++) {\n    outputArray.push(parseFloat(valoresSeparados[i]));\n}\n\nmsg.payload = outputArray;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "f17c2cc437054500",
+                "b21fe57a4be358c4",
+                "c05e1462fbd617d8",
+                "8e7db1fcc9873112",
+                "4fe8c2e591e27c5f",
+                "9b4761813001438e"
+            ]
+        ]
+    },
+    {
+        "id": "f17c2cc437054500",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura Corporal",
+        "func": "var valor = msg.payload[0]\nglobal.set(\"TempCorp1\", valor);\nmsg.payload = valor;\nmsg.topic = \"Body Temperature\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "8443329fced91451",
+                "55e039dfc592892d"
+            ]
+        ]
+    },
+    {
+        "id": "7c625c3ec9b7de9c",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 660,
+        "wires": [
+            [
+                "ef4f82824abb800f"
+            ]
+        ]
+    },
+    {
+        "id": "ef4f82824abb800f",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Humedad",
+        "func": "var valor = Math.floor(Math.random()*(90-80)+80);\nglobal.set(\"Humy\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 660,
+        "wires": [
+            [
+                "bbfdd8d270e5078c"
+            ]
+        ]
+    },
+    {
+        "id": "3111accd9450751a",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "27f668ca858f91ec"
+            ]
+        ]
+    },
+    {
+        "id": "27f668ca858f91ec",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura ambiental",
+        "func": "\nvar valor = Math.random() * (24 - 20) + 20;\nmsg.payload = valor.toFixed(2);\nglobal.set(\"TempAmb\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "b90fdb85a7e9de80"
+            ]
+        ]
+    },
+    {
+        "id": "f1a0034d75e91dd2",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "d300fb3d7833f17d"
+            ]
+        ]
+    },
+    {
+        "id": "d300fb3d7833f17d",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura corporal",
+        "func": "var valor = Math.random() * (37.5 - 36.5) + 36.5;\nmsg.payload = valor.toFixed(2);\nglobal.set(\"TempCor\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 780,
+        "wires": [
+            [
+                "4c85a605f2bcced5"
+            ]
+        ]
+    },
+    {
+        "id": "5992df7d7305641a",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 840,
+        "wires": [
+            [
+                "510a1cd672b6e6e6"
+            ]
+        ]
+    },
+    {
+        "id": "510a1cd672b6e6e6",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Frecuencia Cardíaca",
+        "func": "var valor = Math.floor(Math.random() * (160 - 100)) + 100;\nmsg.payload = valor;\nglobal.set(\"Ritmo\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 840,
+        "wires": [
+            [
+                "b7d926b8f7df0db6"
+            ]
+        ]
+    },
+    {
+        "id": "bd45ba37b5a891df",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 900,
+        "wires": [
+            [
+                "1eaa03da2fc0e4f3"
+            ]
+        ]
+    },
+    {
+        "id": "1eaa03da2fc0e4f3",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Oxigenacion",
+        "func": "var valor = Math.floor((Math.random()*(100-85)+85));\nglobal.set(\"O2\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 900,
+        "wires": [
+            [
+                "6fbe3d284b7143e4"
+            ]
+        ]
+    },
+    {
+        "id": "4fe8c2e591e27c5f",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Frecuencia ",
+        "func": "var valor = msg.payload[1]\nglobal.set(\"RitmoCard1\", valor);\nmsg.payload = valor;\nmsg.topic = \"Heart Rate\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 140,
+        "wires": [
+            [
+                "37ee40054c71a0c0",
+                "f909aa55a731c71c"
+            ]
+        ]
+    },
+    {
+        "id": "b21fe57a4be358c4",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Oxigenacion",
+        "func": "var valor = msg.payload[2]\nglobal.set(\"O2_1\", valor);\nmsg.payload = valor;\nmsg.topic = \"Blood Oxygen Saturation\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "aab9273d32d1968f",
+                "1b6f36b68390f074"
+            ]
+        ]
+    },
+    {
+        "id": "c05e1462fbd617d8",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Temperatura Ambiental",
+        "func": "var valor = msg.payload[3]\nglobal.set(\"TempAmb1\", valor);\nmsg.payload = valor;\nmsg.topic = \"Environmental Temperature\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "225e565d53a1ca83",
+                "25641fde25ca0167"
+            ]
+        ]
+    },
+    {
+        "id": "8e7db1fcc9873112",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Humedad",
+        "func": "var valor = msg.payload[4]\nglobal.set(\"Hum1\", valor);\nmsg.payload = valor;\nmsg.topic = \"Humidity\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "31cbc9c68318b3b5",
+                "f321ce3f7261550d"
+            ]
+        ]
+    },
+    {
+        "id": "71ead2b0ae880d67",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "bbfdd8d270e5078c",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 17",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "b90fdb85a7e9de80",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 18",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4c85a605f2bcced5",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 19",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b7d926b8f7df0db6",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 20",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "6fbe3d284b7143e4",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 21",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "5fe3168d642a3c70",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Separardatos",
+        "func": "// Suponemos que msg.payload contiene las fechas y textos separados por comas\nconst fechasYTextosString = msg.payload;\n\nfunction separarFechasYTextos(fechasYTextosString) {\n    const fechasYTextos = fechasYTextosString.split(',');\n\n    // Obtener las fechas y darles formato\n    const fechasSeparadas = fechasYTextos.slice(0, 2).map((fecha) => {\n        const [dia, mes, anio] = fecha.split('/');\n        return `${dia}/${mes}/${anio}`;\n    });\n\n    // Obtener los textos que siguen después de las fechas\n    const textos = fechasYTextos.slice(2).map(item => item.trim());\n\n    // Devolver un array que contiene las fechas y los textos\n    return [...fechasSeparadas, ...textos];\n}\n\nconst fechasYTextosSeparados = separarFechasYTextos(fechasYTextosString);\nmsg.payload = fechasYTextosSeparados;\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1141.9999542236328,
+        "y": 562.0000228881836,
+        "wires": [
+            [
+                "d7d22d831f688877",
+                "7a7b5d5ac3f56a05",
+                "77611eb5d23dfb5b",
+                "b1ca1e8e8e38faaf",
+                "bdddc6b8de1068bb",
+                "774400afefc24798",
+                "f5225a6061fb5522",
+                "b093d18f3146f498",
+                "236fa111121ce690",
+                "492041aec2462472"
+            ]
+        ]
+    },
+    {
+        "id": "e4826d26df09b19b",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 22",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "d7d22d831f688877",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Fecha inicial",
+        "func": "var valor = msg.payload[0]\nglobal.set(\"Fecha1\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 520,
+        "wires": [
+            [
+                "71ead2b0ae880d67"
+            ]
+        ]
+    },
+    {
+        "id": "7a7b5d5ac3f56a05",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Fecha final",
+        "func": "var valor = msg.payload[1]\nglobal.set(\"FechaFin\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 560,
+        "wires": [
+            [
+                "82ce0271f2bb1e44"
+            ]
+        ]
+    },
+    {
+        "id": "82ce0271f2bb1e44",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b1922d3aa6b041e2",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 24",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "351686601e37562e",
+        "type": "mqtt in",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Sensor/IoT/23/Reporte/2",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "ba675f41e601621c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 1540,
+        "wires": [
+            [
+                "e4826d26df09b19b"
+            ]
+        ]
+    },
+    {
+        "id": "359fa57fefba570a",
+        "type": "mqtt in",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Sensor/IoT/23/1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "4e2a9797aa584475",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 140,
+        "wires": [
+            [
+                "dfeec47e8a248ddf"
+            ]
+        ]
+    },
+    {
+        "id": "29a49076d59703be",
+        "type": "subflow:43f6f4537b5e41bf",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "x": 100,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f48463cb11c6e24f",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "fd1f099b8bd992b0",
+        "type": "mqtt in",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Sensor/IoT/23/ReporteVar/1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "ba675f41e601621c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 1480,
+        "wires": [
+            [
+                "54e15b9335047ff6",
+                "c4f5bdeb793962d9"
+            ]
+        ]
+    },
+    {
+        "id": "54e15b9335047ff6",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "function 17",
+        "func": "// Recibir un msg.payload con un listado de texto separado por comas\nconst listaTexto = msg.payload;\n\n// Separar los valores en un array\nconst valoresSeparados = listaTexto.split(',').map(item => item.trim());\n\n\n// Puedes acceder a los valores individualmente en \"valoresSeparados\" (por ejemplo, valoresSeparados[0], valoresSeparados[1], etc.)\n\n// Enviar cada valor individualmente al siguiente nodo\nconst outputArray = valoresSeparados;\n\nmsg.payload = outputArray;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1480,
+        "wires": [
+            [
+                "a2120f0dc2964486"
+            ]
+        ]
+    },
+    {
+        "id": "c4f5bdeb793962d9",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "a2120f0dc2964486",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "function 18",
+        "func": "\nmsg.payload = global.get(\"TempCor\") + \",\" + global.get(\"Ritmo\") +\n    \",\" + global.get(\"O2\") + \",\" + global.get(\"TempAmb\") + \",\" + global.get(\"Humy\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 1480,
+        "wires": [
+            [
+                "f48463cb11c6e24f"
+            ]
+        ]
+    },
+    {
+        "id": "3d7df6e1fb120d7c",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 960,
+        "wires": [
+            [
+                "87434c4a196650fe"
+            ]
+        ]
+    },
+    {
+        "id": "87434c4a196650fe",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Peso",
+        "func": "var valor = Math.floor(Math.random()*(13-5)+5);\nglobal.set(\"Weight\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bdd1f4652bc30dd",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Peso",
+        "func": "var valor = msg.payload[4]\nglobal.set(\"Peso_1\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 480,
+        "wires": [
+            [
+                "687b0246e6143c9a",
+                "bd495ab61326e16d"
+            ]
+        ]
+    },
+    {
+        "id": "687b0246e6143c9a",
+        "type": "ui_gauge",
+        "z": "571ca4d46dc44e7f",
+        "name": "Peso",
+        "group": "c7f812465a9a9aa1",
+        "order": 2,
+        "width": 6,
+        "height": 3,
+        "gtype": "wave",
+        "title": "",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "bd495ab61326e16d",
+        "type": "ui_chart",
+        "z": "571ca4d46dc44e7f",
+        "name": "Peso",
+        "group": "c7f812465a9a9aa1",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "label": "%",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b557bbb8c4fc0596",
+        "type": "mqtt in",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "topic": "Reporte/hora/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "4e2a9797aa584475",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1744.0000228881836,
+        "y": 540.0000076293945,
+        "wires": [
+            [
+                "26878c3ce82f7db0",
+                "dfbfa4bc38e001e8"
+            ]
+        ]
+    },
+    {
+        "id": "26878c3ce82f7db0",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "SepararDatos",
+        "func": "// Suponemos que msg.payload contiene las fechas\n// y horas separadas por comas\nconst datosString = msg.payload;\n\nfunction formatearFecha(fechaString) {\n    const [dia, mes, anio] = fechaString.split('/');\n    return `${dia}/${mes}/${anio}`;\n}\n\nfunction formatearHora(horaString) {\n    const [horas, minutos] = horaString.split(':');\n    return `${horas}:${minutos}`;\n}\n\n\nfunction separarFechasYHorasConFormato(datosString) {\n    const datos = datosString.split(',');\n\n    const fecha1Formateada = formatearFecha(datos[0]);\n    const fecha2Formateada = formatearFecha(datos[1]);\n    const hora1Formateada = formatearHora(datos[2]);\n    const hora2Formateada = formatearHora(datos[3]);\n\n    const datosSeparadosConFormato = [fecha1Formateada, fecha2Formateada, hora1Formateada, hora2Formateada, datos[4], datos[5], datos[6], datos[7], datos[8], datos[9],];\n\n    return datosSeparadosConFormato;\n}\n\nconst datosSeparadosConFormato = separarFechasYHorasConFormato(datosString);\nmsg.payload = datosSeparadosConFormato;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1940,
+        "y": 520,
+        "wires": [
+            [
+                "2dfaa8d2004e9e75",
+                "c52e52564257f66e",
+                "75dd6773749f7e73",
+                "65eafc550b391193",
+                "82523f5878f7720d",
+                "8671ea1cb1d177c1",
+                "3f41859f29010969",
+                "b2fa9254da69112b",
+                "85bcfc73c274b349",
+                "3db7fb13f989f1b6"
+            ]
+        ]
+    },
+    {
+        "id": "dfbfa4bc38e001e8",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 30",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1900,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "2dfaa8d2004e9e75",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Fecha inicial",
+        "func": "var valor = msg.payload[0]\nflow.set(\"Fecha1\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2130,
+        "y": 500,
+        "wires": [
+            [
+                "4d99ba4bb623a5c6"
+            ]
+        ]
+    },
+    {
+        "id": "c52e52564257f66e",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Fecha final",
+        "func": "var valor = msg.payload[1]\nflow.set(\"FechaFin\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2130,
+        "y": 540,
+        "wires": [
+            [
+                "c2741375cf5cdb0b"
+            ]
+        ]
+    },
+    {
+        "id": "75dd6773749f7e73",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Hora inicial",
+        "func": "var valor = msg.payload[2]\nflow.set(\"HoraInit\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2130,
+        "y": 580,
+        "wires": [
+            [
+                "e6271c3d64760b66"
+            ]
+        ]
+    },
+    {
+        "id": "65eafc550b391193",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Hora final",
+        "func": "var valor = msg.payload[3]\nflow.set(\"HoraFin\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2120,
+        "y": 620,
+        "wires": [
+            [
+                "7547a3ef9684ad8e"
+            ]
+        ]
+    },
+    {
+        "id": "4d99ba4bb623a5c6",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 31",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c2741375cf5cdb0b",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "e6271c3d64760b66",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "7547a3ef9684ad8e",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 34",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2300,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "22e49ea5fa8e6d66",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 35",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "bdddc6b8de1068bb",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "BodyTempValidation",
+        "func": "var valor = msg.payload[4]\nglobal.set(\"BodyTVal\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 680,
+        "wires": [
+            [
+                "22e49ea5fa8e6d66"
+            ]
+        ]
+    },
+    {
+        "id": "774400afefc24798",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "HeartRateValidation",
+        "func": "var valor = msg.payload[5]\nglobal.set(\"HRVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 720,
+        "wires": [
+            [
+                "720854b52557de83"
+            ]
+        ]
+    },
+    {
+        "id": "720854b52557de83",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 36",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "2d42ce9cf0178c3e",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 37",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "f5225a6061fb5522",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "OxygenValidation",
+        "func": "var valor = msg.payload[6]\nglobal.set(\"FechaInit\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 760,
+        "wires": [
+            [
+                "2d42ce9cf0178c3e"
+            ]
+        ]
+    },
+    {
+        "id": "b093d18f3146f498",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "EnvTValidation",
+        "func": "var valor = msg.payload[7]\nglobal.set(\"EnvTVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 800,
+        "wires": [
+            [
+                "e4e3460bdc300e95"
+            ]
+        ]
+    },
+    {
+        "id": "e4e3460bdc300e95",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 38",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "77611eb5d23dfb5b",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Hora inicial",
+        "func": "var valor = msg.payload[2]\nglobal.set(\"HoraInit\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 600,
+        "wires": [
+            [
+                "c75db7c6ed665736"
+            ]
+        ]
+    },
+    {
+        "id": "b1ca1e8e8e38faaf",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "Hora final",
+        "func": "var valor = msg.payload[3]\nglobal.set(\"HoraFin\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 640,
+        "wires": [
+            [
+                "a8e104bcd9afdd46"
+            ]
+        ]
+    },
+    {
+        "id": "c75db7c6ed665736",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 39",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "a8e104bcd9afdd46",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 40",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "0abef2666b94ae90",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 41",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "236fa111121ce690",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "HumidityValidation",
+        "func": "var valor = msg.payload[8]\nglobal.set(\"HumVal\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 840,
+        "wires": [
+            [
+                "0abef2666b94ae90"
+            ]
+        ]
+    },
+    {
+        "id": "492041aec2462472",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "WeightValidation",
+        "func": "var valor = msg.payload[9]\nglobal.set(\"WeightVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 880,
+        "wires": [
+            [
+                "893fef1e1be9b9c3"
+            ]
+        ]
+    },
+    {
+        "id": "893fef1e1be9b9c3",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "3731b2025fb70319",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "82523f5878f7720d",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "BodyTempValidation",
+        "func": "var valor = msg.payload[4]\nflow.set(\"BodyTVal\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2160,
+        "y": 660,
+        "wires": [
+            [
+                "3731b2025fb70319"
+            ]
+        ]
+    },
+    {
+        "id": "8671ea1cb1d177c1",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "HeartRateValidation",
+        "func": "var valor = msg.payload[5]\nflow.set(\"HRVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2160,
+        "y": 700,
+        "wires": [
+            [
+                "9271029d59cc09b7"
+            ]
+        ]
+    },
+    {
+        "id": "9271029d59cc09b7",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "e54a4bd0a1464ac2",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 45",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "3f41859f29010969",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "OxygenValidation",
+        "func": "var valor = msg.payload[6]\nflow.set(\"FechaInit\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2150,
+        "y": 740,
+        "wires": [
+            [
+                "e54a4bd0a1464ac2"
+            ]
+        ]
+    },
+    {
+        "id": "b2fa9254da69112b",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "EnvTValidation",
+        "func": "var valor = msg.payload[7]\nflow.set(\"EnvTVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 780,
+        "wires": [
+            [
+                "7183ba92a364cb38"
+            ]
+        ]
+    },
+    {
+        "id": "7183ba92a364cb38",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 46",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b5cb9e93cffe50f5",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 47",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "85bcfc73c274b349",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "HumidityValidation",
+        "func": "var valor = msg.payload[8]\nflow.set(\"HumVal\", valor);\nmsg.payload = valor;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2150,
+        "y": 820,
+        "wires": [
+            [
+                "b5cb9e93cffe50f5"
+            ]
+        ]
+    },
+    {
+        "id": "3db7fb13f989f1b6",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "WeightValidation",
+        "func": "var valor = msg.payload[9]\nflow.set(\"WeightVal\", valor);\nmsg.payload = valor;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2150,
+        "y": 860,
+        "wires": [
+            [
+                "bf8a4aa4f5e9fb81"
+            ]
+        ]
+    },
+    {
+        "id": "bf8a4aa4f5e9fb81",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 48",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2360,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "90689e678b792e2c",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "function 20",
+        "func": "// Crear el string\nconst miString = \"30/11/2023,21/11/2023,10:13,10:55,false,false,true,true,false,false\";\n\n// Crear el mensaje con el string como payload\nconst nuevoMensaje = {\n    payload: miString\n};\n\n// Enviar el mensaje al próximo nodo en el flujo\nreturn nuevoMensaje;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1630,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d3e28cf914f4afb",
+        "type": "inject",
+        "z": "571ca4d46dc44e7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1460,
+        "y": 40,
+        "wires": [
+            [
+                "90689e678b792e2c"
+            ]
+        ]
+    },
+    {
+        "id": "9b4761813001438e",
+        "type": "function",
+        "z": "571ca4d46dc44e7f",
+        "name": "function 21",
+        "func": "\nmsg.payload = \"field1=\" + msg.payload[0] + \"&field2=\" + msg.payload[1]+\n    \"&field3=\" + msg.payload[2] + \"&field4=\" + msg.payload[3] + \"&field5=\"+\n    msg.payload[4]+\"&status=MQTTPUBLISH\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 300,
+        "wires": [
+            [
+                "37f70413cc8baa2e",
+                "8afa43479c641952"
+            ]
+        ]
+    },
+    {
+        "id": "37f70413cc8baa2e",
+        "type": "debug",
+        "z": "571ca4d46dc44e7f",
+        "name": "debug 50",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "ff1a095edfd63647",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e2d0e06c6a65c236",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 4,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "861eb2407b625009",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "99181786ddd1ae4f",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 6,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "f852d9406247c57d",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7402008088269ab6",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 8,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "58265f29522ff0f3",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "618f11d5e252fc0b",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 10,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "0f32533cecf64c60",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f973aabebccb9257",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 4,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "938d4d56a02a261d",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d598367ea1b4ea7a",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 6,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "da42120bf2d48f7a",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2197b241b41409a9",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 8,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "45547870c2246d0e",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a029b43220de7a24",
+        "type": "ui_spacer",
+        "z": "571ca4d46dc44e7f",
+        "name": "spacer",
+        "group": "1cef5609af88c5cc",
+        "order": 10,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "22f96fb4bcb6f5b3",
+        "type": "ui_group",
+        "name": "Humidity",
+        "tab": "9092cfc176df66b6",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "f10780ad1acf95ac",
+        "type": "ui_group",
+        "name": "Environmental temperature",
+        "tab": "9092cfc176df66b6",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "c3aa2c4196690888",
+        "type": "ui_group",
+        "name": "Body temperature",
+        "tab": "9092cfc176df66b6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "4e2a9797aa584475",
+        "type": "mqtt-broker",
+        "name": "Hive MQTT",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e3e9e5897f271bef",
+        "type": "mqtt-broker",
+        "name": "ThingSpeak",
+        "broker": "mqtt3.thingspeak.com",
+        "port": "1883",
+        "clientid": "NCYDGCwLOyg6CBkkDw4pAhg",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "eb8bede1b3e2cccc",
+        "type": "ui_group",
+        "name": "Heart rate",
+        "tab": "9092cfc176df66b6",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "aa6d7e8c4619f331",
+        "type": "ui_group",
+        "name": "Oxygen Saturation",
+        "tab": "9092cfc176df66b6",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ba675f41e601621c",
+        "type": "mqtt-broker",
+        "name": "MQTT2",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c7f812465a9a9aa1",
+        "type": "ui_group",
+        "d": true,
+        "name": "Weight",
+        "tab": "9092cfc176df66b6",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "9092cfc176df66b6",
+        "type": "ui_tab",
+        "name": "Incubator",
+        "icon": "dashboard",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    }
+]

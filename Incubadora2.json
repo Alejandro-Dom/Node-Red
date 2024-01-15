@@ -1,0 +1,1061 @@
+[
+    {
+        "id": "f77f75f8c0d9da64",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc8b58ef3fe2d508",
+        "type": "mqtt in",
+        "z": "f77f75f8c0d9da64",
+        "name": "Temperature",
+        "topic": "esp32/dht/temperatureR",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "90717e28a1456a21",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "107029aba920f1e4",
+                "76734b11abb4ddac",
+                "b9f29a01881da499",
+                "f59d6f33e204c04b",
+                "703e698f17176173"
+            ]
+        ]
+    },
+    {
+        "id": "c6532585d229f3f8",
+        "type": "mqtt in",
+        "z": "f77f75f8c0d9da64",
+        "name": "Humidity",
+        "topic": "esp32/dht/humidityR",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "90717e28a1456a21",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 340,
+        "wires": [
+            [
+                "accb8cc3c1a61a47",
+                "3c66b4cd30b9c5c9",
+                "fb774b2c1fcc93e1",
+                "58a7ae074b098503"
+            ]
+        ]
+    },
+    {
+        "id": "5e7023f853dff23a",
+        "type": "mqtt in",
+        "z": "f77f75f8c0d9da64",
+        "name": "FotoResistence",
+        "topic": "esp32/potR",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "90717e28a1456a21",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 380,
+        "wires": [
+            [
+                "c88df18e2333b039",
+                "5afdab87e3962e39"
+            ]
+        ]
+    },
+    {
+        "id": "107029aba920f1e4",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Temperature",
+        "func": "var tem = Number(msg.payload);\nglobal.set(\"Temperature\",tem);\nmsg.payload = global.get(\"Temperature\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "72089453550fa95f"
+            ]
+        ]
+    },
+    {
+        "id": "accb8cc3c1a61a47",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Humidity",
+        "func": "var hum = Number(msg.payload);\nglobal.set(\"Humidity\", hum);\nmsg.payload = global.get(\"Humidity\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "72089453550fa95f"
+            ]
+        ]
+    },
+    {
+        "id": "c88df18e2333b039",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "FotoRes",
+        "func": "var Brightness = Number(msg.payload);\nglobal.set(\"Brightness\", Brightness);\nmsg.payload = global.get(\"Brightness\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 380,
+        "wires": [
+            [
+                "72089453550fa95f"
+            ]
+        ]
+    },
+    {
+        "id": "22e6f6d5d4205f08",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 4",
+        "func": "var dated = new Date();\nvar dataT = global.get(\"Temperature\");\nvar dataH = global.get(\"Humidity\");\nvar dataFR = global.get(\"Brightness\");\nvar datet = dated.toLocaleDateString();\nvar dataTC = global.get(\"TempC\");\nmsg.topic = \"INSERT INTO `sensordata1`(`Date`,`Temperature`, `Humidity`, `BPM`, `Brightness`) VALUES ('\"+ datet + \"', \" + dataT + \", \" + dataH + \",\" + dataTC +\", \"+ dataFR +\")\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "90bad4eb6aad773c",
+        "type": "mqtt in",
+        "z": "f77f75f8c0d9da64",
+        "name": "TemperatureCorporal",
+        "topic": "esp32/tempC",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "90717e28a1456a21",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "cb94fabfde454133",
+                "eab283b4f8a245fc"
+            ]
+        ]
+    },
+    {
+        "id": "cb94fabfde454133",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "TemperatureCorporal",
+        "func": "var TempC = Number(msg.payload);\nglobal.set(\"TempC\", TempC);\nmsg.payload = global.get(\"TempC\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "72089453550fa95f"
+            ]
+        ]
+    },
+    {
+        "id": "72089453550fa95f",
+        "type": "switch",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Hola",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "22e6f6d5d4205f08"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "369b4423aab1308e",
+        "type": "inject",
+        "z": "f77f75f8c0d9da64",
+        "name": "Tiempo de envio a Database",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hola",
+        "payloadType": "str",
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "72089453550fa95f"
+            ]
+        ]
+    },
+    {
+        "id": "6dbe526d7b44502d",
+        "type": "inject",
+        "z": "f77f75f8c0d9da64",
+        "name": "Vaciar Tabla",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 890,
+        "y": 380,
+        "wires": [
+            [
+                "68e6be8934c69c96"
+            ]
+        ]
+    },
+    {
+        "id": "68e6be8934c69c96",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 5",
+        "func": "msg.topic = \"TRUNCATE TABLE sensordata1;\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "29d1b8fd4ba87903",
+        "type": "debug",
+        "z": "f77f75f8c0d9da64",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8cc4d837f3f320be",
+        "type": "debug",
+        "z": "f77f75f8c0d9da64",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1720,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b1ac805e3cda5df5",
+        "type": "inject",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 740,
+        "y": 560,
+        "wires": [
+            [
+                "c67383ef04012a76"
+            ]
+        ]
+    },
+    {
+        "id": "cde330f21f4f32bc",
+        "type": "inject",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "20",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 740,
+        "y": 600,
+        "wires": [
+            [
+                "284f23a5fd42cc52"
+            ]
+        ]
+    },
+    {
+        "id": "c67383ef04012a76",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 11",
+        "func": "var time = new Date().toTimeString();\nvar pt6 = global.get(\"POT6\");\nvar pt7 = global.get(\"POT7\");\nvar pt8 = global.get(\"POT8\");\nvar pt9 = global.get(\"POT9\");\n//var pt10 = global.get(\"POT10\");\n\nvar m = { \"TIME\": time, \"POT6\": pt6, \"POT7\": pt7, \"POT8\": pt8, \"POT9\": pt9};\nreturn { payload: m };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 560,
+        "wires": [
+            [
+                "c5fb6c9d1e26ce22"
+            ]
+        ]
+    },
+    {
+        "id": "284f23a5fd42cc52",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 12",
+        "func": "msg = {\n    attachments: {\n        filename: \"ReporteDiario.csv\",\n        path: \"C:/Users/ricar/OneDrive/Documentos/ReporteDiario.csv\"\n    }\n}\nmsg.payload = \"REPORTE\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 600,
+        "wires": [
+            [
+                "d9066f63aa3caea7"
+            ]
+        ]
+    },
+    {
+        "id": "c5fb6c9d1e26ce22",
+        "type": "csv",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "TIME,POT6,POT7,POT8,POT9",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1050,
+        "y": 560,
+        "wires": [
+            [
+                "73f51a32779b995c"
+            ]
+        ]
+    },
+    {
+        "id": "73f51a32779b995c",
+        "type": "file",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "filename": "C:\\Users\\ricar\\OneDrive\\Documentos\\ReporteDiario.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 1330,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9066f63aa3caea7",
+        "type": "e-mail",
+        "z": "f77f75f8c0d9da64",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "richarddecervantes2442@gmail.com",
+        "dname": "",
+        "x": 1150,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3c66b4cd30b9c5c9",
+        "type": "ui_gauge",
+        "z": "f77f75f8c0d9da64",
+        "name": "Humedad",
+        "group": "",
+        "order": 2,
+        "width": 7,
+        "height": 4,
+        "gtype": "wave",
+        "title": "Humedad",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 320,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "fb774b2c1fcc93e1",
+        "type": "ui_chart",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "group": "",
+        "order": 3,
+        "width": 9,
+        "height": 4,
+        "label": "Humedad",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "76734b11abb4ddac",
+        "type": "ui_gauge",
+        "z": "f77f75f8c0d9da64",
+        "name": "Temperatura Ambiental",
+        "group": "",
+        "order": 1,
+        "width": 7,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperatura ambiental",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "32",
+        "colors": [
+            "#01dfc5",
+            "#3de600",
+            "#f00000"
+        ],
+        "seg1": "22",
+        "seg2": "27",
+        "diff": false,
+        "className": "",
+        "x": 370,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b9f29a01881da499",
+        "type": "ui_chart",
+        "z": "f77f75f8c0d9da64",
+        "name": "Temperatura ambiental",
+        "group": "",
+        "order": 1,
+        "width": 9,
+        "height": 4,
+        "label": "Temperatura ambiental",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 360,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb11da4571f9d039",
+        "type": "inject",
+        "z": "f77f75f8c0d9da64",
+        "name": "ENVIO DE DATOS CORREO",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 140,
+        "y": 720,
+        "wires": [
+            [
+                "6408fb2233eb839f"
+            ]
+        ]
+    },
+    {
+        "id": "073c1feec0829e44",
+        "type": "rbe",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "minutes",
+        "topi": "topic",
+        "x": 470,
+        "y": 720,
+        "wires": [
+            [
+                "d0043a97fc49c8d5"
+            ]
+        ]
+    },
+    {
+        "id": "6408fb2233eb839f",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Hora",
+        "func": "var dt1 = new Date();\nconst diasdelasemana = [\"Domingo\", \"Lunes\", \"Martes\", \"Miercoles\", \"Jueves\", \"Viernes\", \"Sábado\"];\nmsg.hora = dt1.getHours();\nmsg.minutes = dt1.getMinutes();\nmsg.diasemana = diasdelasemana[dt1.getDay()];\nmsg.fecha = dt1.getDate();\nmsg.fechastring = dt1.toLocaleDateString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 720,
+        "wires": [
+            [
+                "073c1feec0829e44"
+            ]
+        ]
+    },
+    {
+        "id": "d0043a97fc49c8d5",
+        "type": "switch",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "property": "hora",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "03",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 720,
+        "wires": [
+            [
+                "3297d01f60e55633"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3297d01f60e55633",
+        "type": "switch",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "property": "minutes",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "29",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 720,
+        "wires": [
+            [
+                "04267b59373d7022"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "04267b59373d7022",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 13",
+        "func": "var fechatiempo = msg.fechastring;\nmsg.topic = \"SELECT * FROM sensordata1 WHERE Date = '\" + fechatiempo + \"' \";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 720,
+        "wires": [
+            [
+                "34ec91f47fd4cc3c"
+            ]
+        ]
+    },
+    {
+        "id": "5490a9f0214cea2b",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "function 14",
+        "func": "var titulomsg = \"Informe del día\";\nvar mensaje1 = msg.payload;\n\nmsg = {\n    payload: mensaje1,\n    to: \"richarddecervantes2442@gmail.com\",\n    topic: titulomsg,\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 720,
+        "wires": [
+            [
+                "bad18ada7e025fbe"
+            ]
+        ]
+    },
+    {
+        "id": "bad18ada7e025fbe",
+        "type": "e-mail",
+        "z": "f77f75f8c0d9da64",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "richarddecervantes2442@gmail.com",
+        "dname": "Envio de información",
+        "x": 1560,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "d00e3d92498453c9",
+        "type": "csv",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "ID,DateReception,Date,Temperature,Humidity,BPM,Brightness",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1190,
+        "y": 780,
+        "wires": [
+            [
+                "22213908fd6abbf7"
+            ]
+        ]
+    },
+    {
+        "id": "22213908fd6abbf7",
+        "type": "file",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "filename": "C:\\Users\\ricar\\OneDrive\\Documentos\\Archivo.csv",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 1450,
+        "y": 780,
+        "wires": [
+            [
+                "8cc4d837f3f320be"
+            ]
+        ]
+    },
+    {
+        "id": "34ec91f47fd4cc3c",
+        "type": "json",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1050,
+        "y": 780,
+        "wires": [
+            [
+                "d00e3d92498453c9"
+            ]
+        ]
+    },
+    {
+        "id": "eab283b4f8a245fc",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "TemperatureCorporal",
+        "func": "var p9 = Number(msg.payload);\nglobal.set(\"POT9\", p9);\nmsg.payload = String(global.get(\"POT9\"));\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5afdab87e3962e39",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "FotoRes1",
+        "func": "var p8 = Number(msg.payload);\nglobal.set(\"POT8\", p8);\nmsg.payload = String(global.get(\"POT8\"));\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58a7ae074b098503",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Humidity1",
+        "func": "var p7 = Number(msg.payload);\nglobal.set(\"POT7\", p7);\nmsg.payload = String(global.get(\"POT7\"));\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f59d6f33e204c04b",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Temperature1",
+        "func": "var p6 = Number(msg.payload);\nglobal.set(\"POT6\", p6);\nmsg.payload = String(global.get(\"POT6\"));\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a021271a6d28ae29",
+        "type": "ui_text_input",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "label": "Nombre del paciente",
+        "tooltip": "",
+        "group": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 1200,
+        "y": 60,
+        "wires": [
+            [
+                "706fa5d2569b078b"
+            ]
+        ]
+    },
+    {
+        "id": "706fa5d2569b078b",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "func": "global.set(\"Paciente\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22f2a8f8cf86a9ef",
+        "type": "ui_text_input",
+        "z": "f77f75f8c0d9da64",
+        "name": "",
+        "label": "Correo electrónico",
+        "tooltip": "",
+        "group": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "email",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 1190,
+        "y": 100,
+        "wires": [
+            [
+                "cfe65c861efdf87b"
+            ]
+        ]
+    },
+    {
+        "id": "cfe65c861efdf87b",
+        "type": "function",
+        "z": "f77f75f8c0d9da64",
+        "name": "Correo del especialista",
+        "func": "global.set(\"Correo\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "703e698f17176173",
+        "type": "debug",
+        "z": "f77f75f8c0d9da64",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "90717e28a1456a21",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.emqx.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
